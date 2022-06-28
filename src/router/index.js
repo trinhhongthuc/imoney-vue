@@ -1,20 +1,66 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 
+const validateUser = (to, from, next) => {
+  if (window.localStorage.getItem("user")) next({ name: "Home", params: {} });
+  else next();
+};
+
 const routes = [
   {
     path: "/",
-    name: "home",
+    name: "Home",
+    meta: {
+      layout: "defaultLayout",
+    },
     component: HomeView,
   },
   {
-    path: "/about",
-    name: "about",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    path: "/register",
+    name: "Register",
+    meta: {
+      layout: "authLayout",
+    },
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+      import(/* webpackChunkName: "register" */ "../views/RegisterView.vue"),
+    beforeEnter: validateUser,
+  },
+  {
+    path: "/sign-up",
+    name: "SignUp",
+    meta: {
+      layout: "authLayout",
+    },
+    component: () =>
+      import(/* webpackChunkName: "sign-up" */ "../views/SignUp.vue"),
+    beforeEnter: validateUser,
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+    meta: {
+      layout: "defaultLayout",
+    },
+    component: () =>
+      import(/* webpackChunkName: "profile" */ "../views/Profile.vue"),
+  },
+  {
+    path: "/setting",
+    name: "Setting",
+    meta: {
+      layout: "defaultLayout",
+    },
+    component: () =>
+      import(/* webpackChunkName: "setting" */ "../views/SettingView.vue"),
+  },
+  {
+    path: "/logout",
+    name: "Logout",
+    meta: {
+      layout: "defaultLayout",
+    },
+    component: () =>
+      import(/* webpackChunkName: "logout" */ "../views/LogoutView.vue"),
   },
 ];
 

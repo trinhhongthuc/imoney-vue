@@ -1,0 +1,49 @@
+<template>
+  <header-nav :title="title" :action="action" />
+  <slot />
+  <footer-nav />
+</template>
+
+<script>
+import HeaderNav from "@/components/HeaderNav/HeaderNav.vue";
+import FooterNav from "@/components/FooterNav/FooterNav.vue";
+import setting from "@/assets/images/gear-solid.svg";
+
+import { reactive, ref } from "vue";
+import { useRouter } from "vue-router";
+
+export default {
+  components: {
+    HeaderNav,
+    FooterNav,
+  },
+  setup() {
+    const router = useRouter();
+    const title = ref("");
+    const action = reactive({
+      type: "",
+      text: "",
+      pathName: "",
+    });
+
+    const checkTitleAndAction = () => {
+      switch (router.currentRoute.value.name) {
+        case "Profile":
+          title.value = "My Profile";
+          action.type = "icon";
+          action.text = setting;
+          action.pathName = "Setting";
+          return;
+        default:
+          break;
+      }
+    };
+
+    checkTitleAndAction();
+    return {
+      title,
+      action,
+    };
+  },
+};
+</script>
