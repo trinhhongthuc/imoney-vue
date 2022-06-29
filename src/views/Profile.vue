@@ -9,9 +9,9 @@
             alt="this is avaatr"
           />
         </div>
-        <h2 class="font-bold text-xl title mt-1">trinh hong thuc</h2>
+        <h2 class="font-bold text-xl title mt-1">{{ user.fullName }}</h2>
         <p class="text-center text-sm text-gray-400 mt-1 font-bold">
-          trinhhongthuc@gmail.com
+          {{ user.email }}
         </p>
       </div>
     </div>
@@ -39,50 +39,20 @@
 </template>
 
 <script>
-import wallet from "@/assets/images/wallet-solid.svg";
-import Tool from "@/assets/images/address-card-solid.svg";
-import Logout from "@/assets/images/arrow-right-from-bracket-solid.svg";
-import About from "@/assets/images/award-solid.svg";
-import Privacy from "@/assets/images/toolbox-solid.svg";
-
 import chevron from "@/assets/images/chevron-right-solid.svg";
-
+import { DataMenuProfile } from "@/constants/index";
 import { reactive } from "vue";
 
 export default {
   name: "ProfilePage",
   setup() {
-    const dataMenu = reactive([
-      {
-        name: "Wallet",
-        path: "Home",
-        src: wallet,
-      },
-      {
-        name: "Tool",
-        path: "Home",
-        src: Tool,
-      },
-      {
-        name: "Privacy",
-        path: "Home",
-        src: Privacy,
-      },
-      {
-        name: "About",
-        path: "Home",
-        src: About,
-      },
-      {
-        name: "Logout",
-        path: "Logout",
-        src: Logout,
-      },
-    ]);
+    const dataMenu = reactive(DataMenuProfile);
+    const user = JSON.parse(window.localStorage.getItem("user"));
 
     return {
       chevron,
       dataMenu,
+      user,
     };
   },
 };

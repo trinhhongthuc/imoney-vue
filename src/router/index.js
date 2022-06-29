@@ -62,6 +62,28 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "logout" */ "../views/LogoutView.vue"),
   },
+  {
+    path: "/new-transaction",
+    name: "NewTransaction",
+    meta: {
+      layout: "defaultLayout",
+    },
+    component: () =>
+      import(
+        /* webpackChunkName: "new-transaction" */ "../views/NewTransactionView.vue"
+      ),
+  },
+  {
+    path: "/select-category",
+    name: "SelectCategory",
+    meta: {
+      layout: "defaultLayout",
+    },
+    component: () =>
+      import(
+        /* webpackChunkName: "select-category" */ "../views/SelectCategoryView.vue"
+      ),
+  },
 ];
 
 const router = createRouter({
