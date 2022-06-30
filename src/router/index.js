@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
 
 const validateUser = (to, from, next) => {
-  if (window.localStorage.getItem("user")) next({ name: "Home", params: {} });
-  else next();
+  if (window.sessionStorage.getItem("user")) {
+    next({ name: "Home", params: {} });
+  } else next();
 };
 
 const routes = [
@@ -13,7 +13,15 @@ const routes = [
     meta: {
       layout: "defaultLayout",
     },
-    component: HomeView,
+    children: [
+      {
+        path: "home",
+        component: () =>
+          import(/* webpackChunkName: "register" */ "../views/HomeView.vue"),
+      },
+    ],
+    component: () =>
+      import(/* webpackChunkName: "register" */ "../views/HomeView.vue"),
   },
   {
     path: "/register",

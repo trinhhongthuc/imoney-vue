@@ -27,14 +27,17 @@
         <div class="row">
           <label for="" class="flex pb-3">
             <div class="flex justify-end items-end pr-3 w-12">
-              <span class="w-10 h-10 rounded-full bg-blue-500 flex-none">
-              </span>
+              <router-link
+                :to="{ name: 'SelectCategory', params: {} }"
+                class="w-10 h-10 rounded-full bg-blue-500 flex-none"
+              >
+              </router-link>
             </div>
 
             <div class="flex flex-col flex-1 border-b border-gray-300">
               <input
                 type="text"
-                class="outline-none text-md pb-1"
+                class="outline-none text-md pb-1 pointer-events-none"
                 placeholder="Select a category"
                 v-model="category"
               />
@@ -203,7 +206,11 @@ export default {
     const { createTransaction } = useCreateTransaction();
     const isShowMore = ref(false);
     const price = ref(0);
-    const category = ref("");
+    const category = ref(
+      JSON.parse(window.sessionStorage.getItem("category")) !== null
+        ? JSON.parse(window.sessionStorage.getItem("category"))
+        : ""
+    );
     const note = ref("");
     const location = ref("");
     const friend = ref("");
@@ -224,12 +231,15 @@ export default {
         alert("please enter photo valid!");
         photo.value = null;
       }
-
-      console.log(photo.value.name);
     };
 
     const onSubmit = () => {
-      if (!!price.value && !!category.value && !!note.value) {
+      if (
+        !!price.value &&
+        !!category.value &&
+        !!note.value &&
+        !!location.value
+      ) {
         const data = {
           price: price.value,
           category: category.value,

@@ -19,7 +19,7 @@ const user = {
         password: payload.password,
       };
 
-      window.localStorage.setItem("user", JSON.stringify(newUser));
+      window.sessionStorage.setItem("user", JSON.stringify(newUser));
     },
   },
   actions: {

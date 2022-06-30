@@ -47,7 +47,7 @@ export default {
   name: "ProfilePage",
   setup() {
     const dataMenu = reactive(DataMenuProfile);
-    const user = JSON.parse(window.localStorage.getItem("user"));
+    const user = JSON.parse(window.sessionStorage.getItem("user"));
 
     return {
       chevron,

@@ -5,17 +5,20 @@
         <h4
           class="flex items-center justify-start select-none font-bold font-medium"
         >
-          {{ title }}
+          {{ valuesHeader.title }}
         </h4>
-        <router-link :to="action.pathName" class="cursor-pointer">
+        <router-link
+          :to="{ name: valuesHeader.pathName, params: {} }"
+          class="cursor-pointer"
+        >
           <img
-            v-if="action.type === 'icon'"
-            :src="action.text"
+            v-if="valuesHeader.type === 'icon'"
+            :src="valuesHeader.text"
             class="h-4 w-4"
             alt=""
           />
           <h6 class="font-sm font-bold" v-else>
-            {{ action.text }}
+            {{ valuesHeader.text }}
           </h6>
         </router-link>
       </div>
@@ -28,11 +31,7 @@ import setting from "@/assets/images/gear-solid.svg";
 
 export default {
   props: {
-    title: {
-      type: String,
-      require: true,
-    },
-    action: {
+    valuesHeader: {
       type: Object,
       require: true,
     },

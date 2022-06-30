@@ -1,5 +1,5 @@
 <template>
-  <header-nav :title="title" :action="action" />
+  <header-nav :valuesHeader="valuesHeader" />
   <slot />
   <footer-nav />
 </template>
@@ -10,7 +10,7 @@ import FooterNav from "@/components/FooterNav/FooterNav.vue";
 import setting from "@/assets/images/gear-solid.svg";
 import filter from "@/assets/images/filter-solid.svg";
 
-import { reactive, ref } from "vue";
+import { computed, reactive } from "vue";
 import { useRouter } from "vue-router";
 
 export default {
@@ -20,52 +20,62 @@ export default {
   },
   setup() {
     const router = useRouter();
-    const title = ref("");
-    const action = reactive({
+    let action = reactive({
       type: "",
       text: "",
       pathName: "",
+      title: "",
     });
 
-    const checkTitleAndAction = () => {
+    const valuesHeader = computed(() => {
       switch (router.currentRoute.value.name) {
         case "Profile":
-          title.value = "My Profile";
-          action.type = "icon";
-          action.text = setting;
-          action.pathName = "Setting";
-          return;
+          action = {
+            title: "My Profile",
+            type: "icon",
+            text: setting,
+            pathName: "Setting",
+          };
+
+          return action;
 
         case "NewTransaction":
-          title.value = "Add Transaction";
-          action.type = "button";
-          action.text = "Add";
-          action.pathName = "Home";
-          return;
+          action = {
+            title: "Add Transaction",
+            type: "button",
+            text: "Add",
+            pathName: "Home",
+          };
+
+          return action;
 
         case "SelectCategory":
-          title.value = "Select Category";
-          action.type = "button";
-          action.text = "Cancel";
-          action.pathName = "Home";
-          return;
+          action = {
+            title: "Select Category",
+            type: "button",
+            text: "Cancel",
+            pathName: "Home",
+          };
+
+          return action;
 
         case "Home":
-          title.value = "My Report";
-          action.type = "icon";
-          action.text = filter;
-          action.pathName = "Home";
-          return;
+          action = {
+            title: "My Report",
+            type: "icon",
+            text: filter,
+            pathName: "Home",
+          };
+
+          return action;
 
         default:
-          break;
+          return { type: "", text: "", pathName: "", title: "" };
       }
-    };
+    });
 
-    checkTitleAndAction();
     return {
-      title,
-      action,
+      valuesHeader,
     };
   },
 };

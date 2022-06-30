@@ -39,7 +39,7 @@
 
       <div class="px-8 pt-4">
         <button
-          class="w-full text-center btn-primary py-2 rounded-lg text-white font-bold"
+          class="w-full text-center bg-primary py-2 rounded-lg text-white font-bold"
         >
           Sign Up
         </button>
@@ -48,7 +48,7 @@
     <p v-if="err" class="block px-8 text-center w-full m-3 text-red-600">
       {{ err }}
     </p>
-    <div>
+    <div class="mt-3">
       <p class="text-center">
         <span>I'am already a member.</span>
         <router-link :to="{ name: 'SignUp', params: {} }"

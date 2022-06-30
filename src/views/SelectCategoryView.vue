@@ -20,7 +20,7 @@
       </div>
     </div>
 
-    <div class="row mx-8 mb-3 cursor-pointer">
+    <div class="row mx-8 mb-3 cursor-pointer" @click="setCategory('payment')">
       <div class="bg-while p-2 rounded-[8px] flex">
         <div class="w-10 h-10 flex items-center justify-center">
           <span
@@ -32,7 +32,10 @@
         </div>
       </div>
     </div>
-    <div class="row mx-8 mb-3 cursor-pointer">
+    <div
+      class="row mx-8 mb-3 cursor-pointer"
+      @click="setCategory('withdrawal')"
+    >
       <div class="bg-while p-2 rounded-[8px] flex">
         <div class="w-10 h-10 flex items-center justify-center">
           <span
@@ -45,7 +48,7 @@
       </div>
     </div>
 
-    <div class="row mx-8 mb-3 cursor-pointer">
+    <div class="row mx-8 mb-3 cursor-pointer" @click="setCategory('education')">
       <div class="bg-while p-2 rounded-[8px] flex">
         <div class="w-10 h-10 flex items-center justify-center">
           <span
@@ -74,3 +77,18 @@
     </div>
   </div>
 </template>
+
+<script>
+import { useRouter } from "vue-router";
+
+export default {
+  setup() {
+    const router = useRouter();
+    const setCategory = (category) => {
+      window.sessionStorage.setItem("category", JSON.stringify(category));
+      router.push({ name: "NewTransaction", params: {} });
+    };
+    return { setCategory };
+  },
+};
+</script>

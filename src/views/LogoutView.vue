@@ -9,7 +9,7 @@ export default {
   setup() {
     const router = useRouter();
     const logout = () => {
-      window.localStorage.clear();
+      window.sessionStorage.clear();
       router.push({ name: "Register", params: {} });
     };
     logout();
